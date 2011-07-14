@@ -12,7 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from classes import *
+class Fragment(object):
+        
+    def __init__(self, text='', tones=None, moods=None, subject=None):
+        self.text = text
+        self.tones = [] if tones == None else tones
+        self.moods = [] if moods == None else moods
+        self.subject = '' if subject == None else subject
+        
+    def __str__(self):
+        return self.text
 
 tones = ['formal', 'informal']
 TF = tones[0]

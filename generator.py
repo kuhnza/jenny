@@ -12,11 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from classes import *
-from grammers import *
+import random
+
+from grammers import Fragment, expansions
 
 L_BRACE = '{'
 R_BRACE = '}'
+
+class Message(object):
+    
+    def __init__(self, tone, mood, text):
+        self.tone = tone
+        self.mood = mood
+        self.text = text
+        
+    def __str__(self):
+        return self.text
 
 def filter(fragments, tone, mood):
     filtered = []
@@ -70,7 +81,7 @@ def expand(token, tone, mood):
 
 def construct_message(tone, mood):
     # Get a message structure at random that fits the mood and tone.
-    m = random.choice(filter(expansions['message'], tone, mood)).text
+    text = random.choice(filter(expansions['message'], tone, mood)).text
     
     # Now recurse through the message expanding tokens as we go.
-    return parse(m, tone, mood)
+    return Message(tone, mood, parse(text, tone, mood))
